@@ -261,7 +261,7 @@ public class PostListActivity extends AppCompatActivity {
     }
 
     /**
-     * 북마크 테이블의 모든 튜블 읽어와서 리스트로 반환
+     * 북마크 테이블의 모든 튜플 읽어와서 리스트로 반환
      * @return 북마크된 글 아이디 리스트
      */
     private ArrayList<Integer> getBookmarkTable() {

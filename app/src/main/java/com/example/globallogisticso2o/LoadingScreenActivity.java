@@ -22,7 +22,7 @@ public class LoadingScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading_screen);
 
-        Log.d(TAG, "로딩 화면 출력");
+        Log.d(TAG, "로딩 화면");
         startLoadingScreen();
     }
 
