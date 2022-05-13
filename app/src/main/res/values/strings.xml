@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">GlobalLogisticsO2O</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="post_title">제목</string>
+    <string name="post_content">내용을 입력하세요.</string>
+    <string name="new_post">새 글 작성하기</string>
+    <string name="notice">공지</string>
+    <string name="comminity">커뮤니티</string>
+    <string name="refresh">새로고침</string>
+    <string name="search">검색</string>
+    <string name="hello_blank_fragment">empty fragment</string>
+</resources>

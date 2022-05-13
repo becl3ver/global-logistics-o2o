@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CommunityFragment"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/comminity"
+        android:textSize="24sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/buttonMyPost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
+
+                <Button
+                    android:id="@+id/buttonBookmark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
+
+                <Button
+                    android:id="@+id/buttonPopular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
+
+                <Button
+                    android:id="@+id/buttonTemporary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/buttonNotice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
+
+                <Button
+                    android:id="@+id/buttonFree"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
+
+                <Button
+                    android:id="@+id/buttonQnA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
