@@ -1,5 +1,6 @@
 package com.example.globallogisticso2o;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -24,9 +25,11 @@ public class CommunityFragment extends Fragment {
     // onCreateView의 파라미터를 클래스 멤버 변수로 저장하기 위한 변수들
     private LayoutInflater inflater;
     private ViewGroup container;
+    private ActionBar bar;
 
-    private Button buttonMyPost, buttonBookmark, buttonPopular, buttonTemporary;
-    private Button buttonNotice, buttonFree, buttonQnA;
+    private Button buttonMyPost, buttonBookmark, buttonTemporary;
+    private Button buttonNotice, buttonPopular, buttonFree, buttonQnA;
+    private Button[] buttons = new Button[5];
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle savedInstanceState) {
@@ -37,10 +40,10 @@ public class CommunityFragment extends Fragment {
 
         buttonMyPost = (Button) view.findViewById(R.id.buttonMyPost);
         buttonBookmark = (Button) view.findViewById(R.id.buttonBookmark);
-        buttonPopular = (Button) view.findViewById(R.id.buttonPopular);
         buttonTemporary = (Button) view.findViewById(R.id.buttonTemporary);
 
         buttonNotice = (Button) view.findViewById(R.id.buttonNotice);
+        buttonPopular = (Button) view.findViewById(R.id.buttonPopular);
         buttonFree = (Button) view.findViewById(R.id.buttonFree);
         buttonQnA = (Button) view.findViewById(R.id.buttonQnA);
 
@@ -58,21 +61,21 @@ public class CommunityFragment extends Fragment {
             }
         });
 
-        buttonPopular.setOnClickListener(new View.OnClickListener() {
+        buttonTemporary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 moveToPostList(2);
             }
         });
 
-        buttonTemporary.setOnClickListener(new View.OnClickListener() {
+        buttonNotice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 moveToPostList(3);
             }
         });
 
-        buttonNotice.setOnClickListener(new View.OnClickListener() {
+        buttonPopular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 moveToPostList(4);
@@ -92,6 +95,21 @@ public class CommunityFragment extends Fragment {
                 moveToPostList(6);
             }
         });
+
+        // 기타 버튼들은 반복문으로 처리
+        for(int i = 0; i < 5; i++) {
+            final int idx = i;
+            int butttonId = getResources().getIdentifier("buttonCommunity" + Integer.toString(i + 1),
+                    "id", getActivity().getPackageName());
+
+            buttons[i] = view.findViewById(butttonId);
+            buttons[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    moveToPostList(idx + 7);
+                }
+            });
+        }
 
         return view;
     }

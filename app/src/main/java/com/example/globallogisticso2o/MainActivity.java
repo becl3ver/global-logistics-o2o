@@ -1,6 +1,7 @@
 package com.example.globallogisticso2o;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -25,11 +26,17 @@ public class MainActivity extends AppCompatActivity {
     public AccountFragment accountFragment;
 
     private BottomNavigationView bottomNavigationView;
+    private ActionBar bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        bar = getSupportActionBar();
+        bar.setSubtitle("메인 메뉴"); // TODO : 부제목 보이도록 수정
+        bar.setLogo(R.drawable.ic_baseline_directions_boat_24);
+        bar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_USE_LOGO);
 
         Intent intent = new Intent(this, LoadingScreenActivity.class);
         startActivity(intent);

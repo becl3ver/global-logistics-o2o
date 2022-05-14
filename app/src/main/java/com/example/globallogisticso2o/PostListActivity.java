@@ -2,6 +2,7 @@ package com.example.globallogisticso2o;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,8 +12,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.globallogisticso2o.domain.PostData;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * @author 최재훈
  * @version 1.0, 스레드 부분 미구현
  */
-public class PostListActivity extends AppCompatActivity {
+public class PostListActivity extends AppCompatActivity { //TODO : 새 글 작성하는 플로팅 버튼 만들기
     // 디버깅 시 로그 출력에 사용되는 태그
     private static final String TAG = PostListActivity.class.getSimpleName();
 
@@ -50,6 +50,8 @@ public class PostListActivity extends AppCompatActivity {
     private Intent postListIntent;
     private int category;
     private SQLiteDatabase database;
+    private ActionBar bar;
+
 
     // 검색할 정보를 담아서 보내기 위한 객체
     private PostRequest postRequest;
@@ -62,6 +64,10 @@ public class PostListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_list);
+
+        bar = getSupportActionBar();
+        bar.setLogo(R.drawable.ic_baseline_directions_boat_24);
+        bar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_USE_LOGO);
 
         postListIntent = getIntent();
         category = postListIntent.getIntExtra("category", -1);
@@ -76,17 +82,24 @@ public class PostListActivity extends AppCompatActivity {
     }
 
     /**
-     * 액션 바 설정
-     * @param menu
+     * 액션바 아이템 선택시 동작 처리
+     * @param item
      * @return
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.post_list_menu, menu);
-
-        View v = menu.findItem(R.id.menu_search).getActionView();
-
-        // TODO : 액션 바 설정하기
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_refresh:
+                Toast.makeText(this, "새로 고침 메뉴 선택", Toast.LENGTH_SHORT).show();
+                // TODO : 리사이클러뷰 갱신
+                break;
+            case R.id.menu_search:
+                Toast.makeText(this, "검색 메뉴 선택", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, SearchActivity.class);
+                intent.putExtra("category", category);
+                startActivity(intent);
+                break;
+        }
 
         return true;
     }
@@ -102,7 +115,7 @@ public class PostListActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == REQUEST_NEW_POST) {
+        if(requestCode == REQUEST_NEW_POST) { // 새 글 작성
             if(resultCode == RESULT_OK) {
                 setRecyclerView();
             }
@@ -117,9 +130,8 @@ public class PostListActivity extends AppCompatActivity {
      * 리사이클러뷰 설정
      * category 0 : uid를 통해 글을 검색해서 불러 옴
      * category 1 : 데이터베이스에서 북마크한 글 ID를 읽고 해당 ID의 글 백엔드에서 읽어 옴
-     * category 2 : 인기 글 검색
-     * category 3 : 데이터베이스에 저장된 임시 글 읽어 옴
-     * category 4 ~ : 해당 분류의 글들 읽어 옴
+     * category 2 : 데이터베이스에 저장된 임시 글 읽어 옴
+     * category 3 ~ : 해당 분류의 글들 읽어 옴
      */
     private void setRecyclerView() {
         recyclerView = findViewById(R.id.recyclerView);
@@ -138,9 +150,6 @@ public class PostListActivity extends AppCompatActivity {
                 // TODO : postRequest로 글 읽어 옴
                 break;
             case 2:
-                // TODO : 인기글 로드
-                break;
-            case 3:
                 setTemporaryTable();
                 postDatas = getTemporaryTable();
                 break;
